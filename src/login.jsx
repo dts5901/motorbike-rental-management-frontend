@@ -18,10 +18,11 @@ export default function Login() {
                 style={{
                     fontFamily: "Trebuchet MS, Verdana, sans-serif",
                     fontWeight: 600,
-                    fontSize: "26pt"
+                    fontSize: "25px"
                 }}
+                role="text"
             >
-                Motorbike Rental <br aria-hidden="true" /> &nbsp; Management System
+                Motorbike Rental <span className="lineBreak" /> &nbsp; Management System
             </h1>
 
             <div style={{ padding: "0px 50px" }}>
@@ -32,7 +33,7 @@ export default function Login() {
                             <input
                                 type="text"
                                 name="username"
-                                className="w3-input"
+                                className="w3-input w3-border"
                                 placeholder="Username"
                             />
                         </td>
@@ -43,7 +44,7 @@ export default function Login() {
                             <input
                                 type="password"
                                 name="password"
-                                className="w3-input"
+                                className="w3-input w3-border"
                                 placeholder="Password"
                             />
                         </td>
