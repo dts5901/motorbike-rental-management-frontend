@@ -1,4 +1,9 @@
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+
 export default function Login() {
+    const { register, setValue, watch, handleSubmit, formState: { errors }, reset } = useForm();
+
     const containerStyle = {
         width: "90%",
         maxWidth: "600px",
@@ -7,6 +12,21 @@ export default function Login() {
         left: "50%",
         transform: "translate(-50%, -50%)"
     };
+
+    // Register the select field once
+    useEffect(() => {
+        register('username', { required: 'Username is required' });
+        register('password', { required: 'Password is required' });
+    }, [register]);
+    const formValues = watch();
+
+    const captureFormValue = (event) => {
+        setValue(event.target.name, event.target.value, { shouldValidate: true });
+    }//end function
+
+    const processLogin = async (data) => {
+        alert("Loging in...");
+    }//end function
 
     return (
         <div
@@ -25,7 +45,10 @@ export default function Login() {
                 Motorbike Rental <span className="lineBreak" /> &nbsp; Management System
             </h1>
 
-            <div style={{ padding: "0px 50px" }}>
+            <form
+                onSubmit={handleSubmit(processLogin)}
+                style={{ padding: "0px 50px" }}
+            >
                 <table className="w3-table">
                     <tr>
                         <td>
@@ -34,8 +57,11 @@ export default function Login() {
                                 type="text"
                                 name="username"
                                 className="w3-input w3-border"
+                                onChange={captureFormValue}
                                 placeholder="Username"
+                                value={formValues.username??""}
                             />
+                            {errors.username && <span className="w3-text-red">{errors.username.message}</span>}
                         </td>
                     </tr>
                     <tr>
@@ -45,8 +71,11 @@ export default function Login() {
                                 type="password"
                                 name="password"
                                 className="w3-input w3-border"
+                                onChange={captureFormValue}
                                 placeholder="Password"
+                                value={formValues.password??""}
                             />
+                            {errors.password && <span className="w3-text-red">{errors.password.message}</span>}
                         </td>
                     </tr>
                     <tr>
@@ -60,7 +89,7 @@ export default function Login() {
                         </td>
                     </tr>
                 </table>
-            </div>
+            </form>
         </ div >
     );
 }//end function
